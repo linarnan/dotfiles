@@ -12,7 +12,7 @@ set nocompatible
 set t_Co=256
 set background=dark
 syntax on
-colorscheme molotov
+"colorscheme molotov
 " }}}
 
 " Mapleader {{{
@@ -108,6 +108,15 @@ set wrapscan " Searches wrap around end of file
 
 " Configuration -------------------------------------------------------------
 
+" NERDTREE {{{
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+map <C-n> :NERDTreeToggle<CR>
+map <C-g> :NERDTreeFocus<CR>
+let g:NERDTreeDirArrows = 1
+let g:NERDTreeDirArrowExpandable = '▸'
+" }}}
+
 " FastEscape {{{
 " Speed up transition from modes
 if ! has('gui_running')
@@ -176,16 +185,6 @@ augroup general_config
   " Clear last search (,qs) {{{
   map <silent> <leader>qs <Esc>:noh<CR>
   " map <silent> <leader>qs <Esc>:let @/ = ""<CR>
-  " }}}
-
-  " Vim on the iPad {{{
-  if &term == "xterm-ipad"
-    nnoremap <Tab> <Esc>
-    vnoremap <Tab> <Esc>gV
-    onoremap <Tab> <Esc>
-    inoremap <Tab> <Esc>`^
-    inoremap <Leader><Tab> <Tab>
-  endif
   " }}}
 
   " Remap keys for auto-completion menu {{{
@@ -395,7 +394,6 @@ augroup word_processor_mode
     setlocal noexpandtab
     setlocal wrap
     setlocal linebreak
-    Goyo 100
   endfunction " }}}
   com! WP call WordProcessorMode()
 augroup END
@@ -428,42 +426,6 @@ augroup filetype_c
 augroup END
 " }}}
 
-" Clojure {{{
-augroup filetype_clojure
-  autocmd!
-  let g:vimclojure#ParenRainbow = 1 " Enable rainbow parens
-  let g:vimclojure#DynamicHighlighting = 1 " Dynamic highlighting
-  let g:vimclojure#FuzzyIndent = 1 " Names beginning in 'def' or 'with' to be indented as if they were included in the 'lispwords' option
-augroup END
-" }}}
-
-" Coffee {{{
-augroup filetype_coffee
-  autocmd!
-  au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
-augroup END
-" }}}
-
-" Fish {{{
-augroup filetype_fish
-  autocmd!
-  au BufRead,BufNewFile *.fish set ft=fish
-augroup END
-" }}}
-
-" Handlebars {{{
-augroup filetype_hbs
-  autocmd!
-  au BufRead,BufNewFile *.hbs,*.handlebars,*.hbs.erb,*.handlebars.erb setl ft=mustache syntax=mustache
-augroup END
-" }}}
-
-" Jade {{{
-augroup filetype_jade
-  autocmd!
-  au BufRead,BufNewFile *.jade set ft=jade syntax=jade
-augroup END
-" }}}
 
 " JavaScript {{{
 augroup filetype_javascript
@@ -483,27 +445,6 @@ augroup END
 augroup filetype_markdown
   autocmd!
   let g:markdown_fenced_languages = ['ruby', 'html', 'javascript', 'css', 'erb=eruby.html', 'bash=sh']
-augroup END
-" }}}
-
-" Nu {{{
-augroup filetype_nu
-  autocmd!
-  au BufNewFile,BufRead *.nu,*.nujson,Nukefile setf nu
-augroup END
-" }}}
-
-" Ruby {{{
-augroup filetype_ruby
-  autocmd!
-
-  au BufRead,BufNewFile Rakefile,Capfile,Gemfile,.autotest,.irbrc,*.treetop,*.tt set ft=ruby syntax=ruby
-
-  " Ruby.vim {{{
-  let ruby_operators = 1
-  let ruby_space_errors = 1
-  let ruby_fold = 1
-  " }}}
 augroup END
 " }}}
 
@@ -552,28 +493,6 @@ augroup ctrlp_config
 augroup END
 " }}}
 
-" Silver Searcher {{{
-augroup ag_config
-  autocmd!
-
-  if executable("ag")
-    " Note we extract the column as well as the file and line number
-    set grepprg=ag\ --nogroup\ --nocolor\ --column
-    set grepformat=%f:%l:%c%m
-
-    " Have the silver searcher ignore all the same things as wilgignore
-    let b:ag_command = 'ag %s -i --nocolor --nogroup'
-
-    for i in split(&wildignore, ",")
-      let i = substitute(i, '\*/\(.*\)/\*', '\1', 'g')
-      let b:ag_command = b:ag_command . ' --ignore "' . substitute(i, '\*/\(.*\)/\*', '\1', 'g') . '"'
-    endfor
-
-    let b:ag_command = b:ag_command . ' --hidden -g ""'
-    let g:ctrlp_user_command = b:ag_command
-  endif
-augroup END
-" }}}
 
 " EasyAlign.vim {{{
 augroup easy_align_config
@@ -612,37 +531,28 @@ augroup END
 " Load plugins {{{
 call plug#begin('~/.vim/plugged')
 
+Plug 'flazz/vim-colorschemes'
 Plug 'ap/vim-css-color'
 Plug 'bling/vim-airline'
 Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'guns/vim-clojure-static'
-Plug 'joker1007/vim-ruby-heredoc-syntax'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-emoji'
-Plug 'junegunn/goyo.vim'
-Plug 'kchmck/vim-coffee-script'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'msanders/snipmate.vim'
-Plug 'mustache/vim-mustache-handlebars'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'oplatek/Conque-Shell'
 Plug 'pangloss/vim-javascript'
-Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
-Plug 'slim-template/vim-slim', { 'for': 'slim' }
 Plug 'thoughtbot/vim-rspec'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-haml'
 Plug 'tpope/vim-markdown',     { 'for': 'markdown' }
-Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'vim-ruby/vim-ruby'
-Plug 'vim-scripts/fish.vim',   { 'for': 'fish' }
-Plug 'vim-scripts/jade.vim',   { 'for': 'jade' }
-Plug 'wavded/vim-stylus',      { 'for': 'stylus' }
 Plug 'wlangstroth/vim-racket'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'

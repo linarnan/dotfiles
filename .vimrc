@@ -32,6 +32,7 @@ set cursorline " Highlight current line
 set diffopt=filler " Add vertical spaces to keep right and left aligned
 set diffopt+=iwhite " Ignore whitespace changes (focus on code changes)
 set encoding=utf-8 nobomb " BOM often causes trouble
+set fileencodings=utf-8,cp950,big5
 set esckeys " Allow cursor keys in insert mode
 set expandtab " Expand tabs to spaces
 set foldcolumn=0 " Column to show folds
@@ -51,7 +52,7 @@ set formatoptions+=l " Don't break lines that are already long
 set formatoptions+=1 " Break before 1-letter words
 set gdefault " By default add g flag to search/replace. Add g to toggle
 set hidden " When a buffer is brought to foreground, remember undo history and marks
-set history=1000 " Increase history from 20 default to 1000
+set history=2000 " Increase history from 20 default to 1000
 set hlsearch " Highlight searches
 set ignorecase " Ignore case of searches
 set incsearch " Highlight dynamically as pattern is typed
@@ -75,13 +76,13 @@ set report=0 " Show all changes
 set ruler " Show the cursor position
 set scrolloff=3 " Start scrolling three lines before horizontal border of window
 set shell=/bin/sh " Use /bin/sh for executing shell commands
-set shiftwidth=2 " The # of spaces for indenting
+set shiftwidth=4 " The # of spaces for indenting
 set shortmess=atI " Don't show the intro message when starting vim
 set showtabline=2 " Always show tab bar
 set sidescrolloff=3 " Start scrolling three columns before vertical border of window
 set smartcase " Ignore 'ignorecase' if search patter contains uppercase characters
 set smarttab " At start of line, <Tab> inserts shiftwidth spaces, <Bs> deletes shiftwidth spaces
-set softtabstop=2 " Tab key results in 2 spaces
+set softtabstop=4 " Tab key results in 2 spaces
 set splitbelow " New window goes below
 set splitright " New windows goes right
 set suffixes=.bak,~,.swp,.swo,.o,.d,.info,.aux,.log,.dvi,.pdf,.bin,.bbl,.blg,.brf,.cb,.dmg,.exe,.ind,.idx,.ilg,.inx,.out,.toc,.pyc,.pyd,.dll
@@ -101,6 +102,8 @@ set wildmenu " Hitting TAB in command mode will show possible completions above 
 set wildmode=list:longest " Complete only until point of ambiguity
 set winminheight=0 " Allow splits to be reduced to a single line
 set wrapscan " Searches wrap around end of file
+set confirm "interface confirm if command conflict
+
 " }}}
 
 " }}}
@@ -132,6 +135,12 @@ endif
 " General {{{
 augroup general_config
   autocmd!
+
+
+  " file manipulate {{{
+    map <F3> :wq!<CR>
+    map <F4> :q!<CR>
+  " }}}
 
   " Speed up viewport scrolling {{{
   nnoremap <C-e> 3<C-e>

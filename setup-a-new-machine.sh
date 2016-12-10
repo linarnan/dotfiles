@@ -13,7 +13,7 @@ cd ~/migration
 # what is worth reinstalling?
 brew leaves      		> brew-list.txt    # all top-level brew installs
 brew cask list 			> cask-list.txt
-npm list -g --depth=0 	> npm-g-list.txt
+npm list -g --depth=0 	        > npm-g-list.txt
 
 
 # then compare brew-list to what's in `brew.sh`
@@ -29,7 +29,6 @@ cp -R ~/.gnupg ~/migration/home
 
 cp /Library/Preferences/SystemConfiguration/com.apple.airport.preferences.plist ~/migration  # wifi
 
-cp ~/Library/Preferences/net.limechat.LimeChat.plist ~/migration
 cp ~/Library/Preferences/com.tinyspeck.slackmacgap.plist ~/migration
 
 cp -R ~/Library/Services ~/migration # automator stuff
@@ -42,12 +41,9 @@ cp ~/.gitconfig.local ~/migration
 
 cp ~/.z ~/migration # z history file.
 
-# sublime text settings
-cp "~/Library/Application Support/Sublime Text 3/Packages" ~/migration
 
 
-# iTerm settings.
-  # Prefs, General, Use settings from Folder
+
 
 # Finder settings and TotalFinder settings
 #   Not sure how to do this yet. Really want to.

@@ -36,7 +36,7 @@ set fileencodings=utf-8,cp950,big5
 set esckeys " Allow cursor keys in insert mode
 set expandtab " Expand tabs to spaces
 set foldcolumn=0 " Column to show folds
-set foldenable " Enable folding
+set nofoldenable " Enable folding
 set foldlevel=0 " Close all folds by default
 set foldmethod=syntax " Syntax are used to specify folds
 set foldminlines=0 " Allow folding single lines
@@ -63,7 +63,7 @@ set lispwords+=defpartial,defpage " Noir core
 set lispwords+=defaction,deffilter,defview,defsection " Ciste core
 set lispwords+=describe,it " Speclj TDD/BDD
 set magic " Enable extended regexes
-set mouse=a " Enable mouse in all in all modes
+set mouse= " Enable mouse in all in all modes
 set noerrorbells " Disable error bells
 set nojoinspaces " Only insert single space after a '.', '?' and '!' with a join command
 set noshowmode " Don't show the current mode (airline.vim takes care of us)

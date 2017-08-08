@@ -19,11 +19,11 @@
 
 [pager]
 	# insanely beautiful diffs ==> npm install -g diff-so-fancy
-	diff = diff-so-fancy | less --tabs=4 -RFX
-	show = diff-so-fancy | less --tabs=4 -RFX
+        #diff = diff-so-fancy | less --tabs=4 -RFX
+        #show = diff-so-fancy | less --tabs=4 -RFX
 
 [interactive]
-	diffFilter = "diff-so-fancy"
+        #diffFilter = "diff-so-fancy"
 
 # so much color
 [color]
@@ -37,9 +37,9 @@
 	whitespace = red reverse
 [color "diff-highlight"]
 	oldNormal = red bold
-	oldHighlight = "red bold 52"
+        #oldHighlight = "red bold 52"
 	newNormal = "green bold"
-	newHighlight = "green bold 22"
+        newHighlight = "green bold 26"
 [color "branch"]
 	current = yellow reverse
 	local = yellow
@@ -88,5 +88,6 @@
 
 [fetch]
 	prune = true
+	recursesubmodules = true
 [diff]
 	compactionHeuristic = true

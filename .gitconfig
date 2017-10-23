@@ -53,6 +53,9 @@
 [merge]
 	tool = opendiff
 
+[branch]
+	autosetuprebase = always
+
 # rewrites of repo paths
 [url "git@github.com:"]
 	insteadOf = "gh:"
